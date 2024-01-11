@@ -3,6 +3,9 @@
 from typing import Tuple, Union
 
 
-def to_kv(k: str, v: Union[int, float]) -> Tuple:
-    """Comment"""
+myTuple = Tuple[str, Union[int, float]]
+
+
+def to_kv(k: str, v: Union[int, float]) -> myTuple:
+    """Return a tuple from args"""
     return (k, v * v)
