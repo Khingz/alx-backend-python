@@ -1,5 +1,5 @@
 #!/bib/usr/env python3
-"""Test package for utils class
+"""Test package for utils module
 """
 from utils import access_nested_map
 import unittest
@@ -21,6 +21,5 @@ class TestAccessNestedMap(unittest.TestCase):
             path: Tuple[str],
             expected: Union[Dict, int],
             ) -> None:
-        """Connemt
-        """
+        """Connemt"""
         self.assertEqual(access_nested_map(in_map, path), expected)
