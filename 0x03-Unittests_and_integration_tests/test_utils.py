@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Test package for utils module
 """
-from utils import (access_nested_map, get_json)
+from utils import (access_nested_map, get_json, memoize)
 import unittest
 from parameterized import parameterized
 from typing import Dict, Tuple, Union
@@ -59,3 +59,27 @@ class TestGetJson(unittest.TestCase):
         with patch("requests.get", return_value=res) as get_url:
             self.assertEqual(get_json(url), expected)
             get_url.assert_called_once_with(url)
+
+
+class TestMemoize(unittest.TestCase):
+    """TEST CLASS FOR MMOIZE
+    """
+    def test_momoize(self):
+        """Test class
+        """
+        class TestClass:
+
+            def a_method(self):
+                return 42
+
+            @memoize
+            def a_property(self):
+                return self.a_method()
+
+        with patch.object(TestClass, 'a_method') as m:
+            m.return_value = lambda: 42
+            obj = TestClass()
+            res1 = obj.a_property()
+            res2 = obj.a_property()
+            m.assert_called_once()
+            self.assertEqual(res1, res2)
