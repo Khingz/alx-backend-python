@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Test package for utils module
 """
-from utils import access_nested_map
+from utils import (access_nested_map, get_json)
 import unittest
 from parameterized import parameterized
 from typing import Dict, Tuple, Union
+from unittest.mock import patch, Mock
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -37,3 +38,24 @@ class TestAccessNestedMap(unittest.TestCase):
         """Asser error"""
         with self.assertRaises(KeyError):
             (access_nested_map(in_map, path), exception)
+
+
+class TestGetJson(unittest.TestCase):
+    """Test class for json
+    """
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+        ])
+    def test_get_json(
+            self,
+            url: str,
+            expected: Dict,
+            ) -> None:
+        """Test case for get_json
+        """
+        res = Mock()
+        res.json.return_value = expected
+        with patch("requests.get", return_value=res) as get_url:
+            self.assertEqual(get_json(url), expected)
+            get_url.assert_called_once_with(url)
