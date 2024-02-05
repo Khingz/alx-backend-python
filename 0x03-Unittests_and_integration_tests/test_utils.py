@@ -62,7 +62,7 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestMemoize(unittest.TestCase):
-    """TEST CLASS FOR MMOIZE
+    """TEST CLASS FOR MEMOIZE
     """
     def test_momoize(self):
         """Test class
@@ -82,8 +82,6 @@ class TestMemoize(unittest.TestCase):
                 return_value=lambda: 42
                 ) as m:
             obj = TestClass()
-            res1 = obj.a_property()
-            res2 = obj.a_property()
-            self.assertEqual(res1, 42)
-            self.assertEqual(res2, 42)
+            self.assertEqual(obj.a_property(), 42)
+            self.assertEqual(obj.a_property(), 42)
             m.assert_called_once()
