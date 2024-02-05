@@ -77,8 +77,8 @@ class TestMemoize(unittest.TestCase):
                 TestClass,
                 'a_method',
                 return_value=lambda: 42
-                ) as m:
-            obj = TestClass()
-            self.assertEqual(obj.a_property(), 42)
-            self.assertEqual(obj.a_property(), 42)
-            m.assert_called_once()
+                ) as ob:
+            cls = TestClass()
+            self.assertEqual(cls.a_property(), 42)
+            self.assertEqual(cls.a_property(), 42)
+            ob.assert_called_once()
