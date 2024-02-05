@@ -63,7 +63,7 @@ class TestGetJson(unittest.TestCase):
 
 class TestMemoize(unittest.TestCase):
     """Tests the `memoize` function."""
-    def test_momoize(self):
+    def test_momoize(self) -> None:
         """Test `mmoize` class """
         class TestClass:
             def a_method(self):
